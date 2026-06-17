@@ -20,8 +20,8 @@ databaseConnection.once("open", () =>
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/mask", maskRoutes);
 app.use("/api/masks", maskRoutes);
+app.use("/api/mask", maskRoutes);
 
 app.listen(port,()=>{
     console.log(`Backend's server is running on port ${port}`);
