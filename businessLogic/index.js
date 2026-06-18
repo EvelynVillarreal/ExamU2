@@ -1,8 +1,8 @@
-const port = process.env.PORT || 3017;
+const port = process.env.PORT || 3018;
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const maskRoutes = require("./routes/maskRoutes");
+const logicRoutes = require("./routes/logicRoutes");
 
 const app = express();
 
@@ -20,8 +20,8 @@ dbConnection.once("open", () =>
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/masks", maskRoutes);
+app.use("/api/masks", logicRoutes);
 
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Business logic server running on port ${port}`);
 });

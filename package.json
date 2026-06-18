@@ -4,8 +4,10 @@
   "description": "Masks inventory management API",
   "main": "crud/index.js",
   "scripts": {
-    "start": "node crud/index.js",
-    "dev": "nodemon crud/index.js"
+    "start:crud": "node crud/index.js",
+    "start:business": "node businessLogic/index.js",
+    "dev:crud": "nodemon crud/index.js",
+    "dev:business": "nodemon businessLogic/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

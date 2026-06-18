@@ -1,29 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { maskLogic } = require("../../buisnessLogic");
-
-const {
-    getAllMasks,
-    getMaskById,
-    createMask,
-    updateMask,
-    deleteMask,
-    calculateTotalUnits,
-} = maskLogic;
+const Mask = require("../models/mask");
 
 router.get("/", async (req, res) => {
     try {
-        const masks = await getAllMasks();
+        const masks = await Mask.find();
         res.json(masks);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
-
-router.get("/total-units", async (req, res) => {
-    try {
-        const total = await calculateTotalUnits();
-        res.json({ totalUnits: total });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -31,7 +13,7 @@ router.get("/total-units", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try {
-        const mask = await getMaskById(req.params.id);
+        const mask = await Mask.findById(req.params.id);
         if (!mask) return res.status(404).json({ message: "Mask not found" });
         res.json(mask);
     } catch (error) {
@@ -41,7 +23,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        const mask = await createMask(req.body);
+        const mask = await Mask.create(req.body);
         res.status(201).json(mask);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -50,7 +32,7 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     try {
-        const mask = await updateMask(req.params.id, req.body);
+        const mask = await Mask.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!mask) return res.status(404).json({ message: "Mask not found" });
         res.json(mask);
     } catch (error) {
@@ -60,7 +42,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-        const mask = await deleteMask(req.params.id);
+        const mask = await Mask.findByIdAndDelete(req.params.id);
         if (!mask) return res.status(404).json({ message: "Mask not found" });
         res.json({ message: "Mask deleted successfully" });
     } catch (error) {

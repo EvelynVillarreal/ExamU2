@@ -1,25 +1,31 @@
 const mongoose = require('mongoose');
-const maskSchema = new mongoose.Schema({
-    serial_number:{
-        type: Number,
-        required: true,
+
+const maskSchema = new mongoose.Schema(
+  {
+    serialNumber: {
+      type: Number,
+      required: true,
+    },
+    brand: {
+      type: String,
+      required: true,
     },
     model: {
-        type: String,
-        required: false
+      type: String,
     },
-    color:{
-        type: String
+    color: {
+      type: String,
     },
-    price:{
-        type: Number,
-        required: true
+    price: {
+      type: Number,
+      required: true,
     },
-    units:{
-        type: Number,
-        required: true
-    }
-},
-    {collection: 'Masks'}
+    units: {
+      type: Number,
+      required: true,
+    },
+  },
+  { collection: 'Masks' }
 );
-module.exports = mongoose.model('Mask',maskSchema);
+
+module.exports = mongoose.model('Mask', maskSchema);
